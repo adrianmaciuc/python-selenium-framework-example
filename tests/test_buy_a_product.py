@@ -1,4 +1,5 @@
 import pytest, time
+from sys import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -11,6 +12,8 @@ def browser():
     options = Options()
     options.add_argument("start-maximized")
     options.add_argument('log-level=3')
+    if platform == "linux" or platform == "linux2":
+        options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     yield driver
     driver.quit()
@@ -30,5 +33,5 @@ def test_buy_a_product(browser):
 
     product.proceed_to_checkout()
     product.wait_for_loading_spinner()
-    
+
     time.sleep(5)
