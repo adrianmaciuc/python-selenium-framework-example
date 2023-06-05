@@ -12,7 +12,7 @@ def browser():
     options = Options()
     options.add_argument("start-maximized")
     options.add_argument('log-level=3')
-    if platform == "linux" or platform == "linux2":
+    if platform != "win32":
         options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     yield driver
