@@ -1,22 +1,23 @@
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from pages.base_page import BasePage
 
-class HomePage:
+class HomePage(BasePage):
     URL = 'https://magento.softwaretestingboard.com/'
-    SEARCH_INPUT = '#search'
-    SEARCH_ICON_BTN = 'button.action.search'
-
-    def __init__(self, browser):
-        self.browser = browser
+    SEARCH_INPUT = (By.CSS_SELECTOR , '#search')
+    SEARCH_ICON_BTN = (By.CSS_SELECTOR , 'button.action.search')
+    PRODUCT_ITEM_INFO = (By.CSS_SELECTOR, '.product-item-info')
 
     def load(self):
         self.browser.get(self.URL)
         self.browser.maximize_window()
 
-    def click(self, by_locator):
-        WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, by_locator))).click()
+    def get_list_of_product_items(self):
+        return self.browser.find_elements(*self.PRODUCT_ITEM_INFO)
+
+    def click_on_nth_product_item(self, number):
+        product_items = self.get_list_of_product_items()
+        product_items[number-1].click()
 
     def search_item(self, text):
-        WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.SEARCH_INPUT))).send_keys(text)
-        self.browser.find_element(By.CSS_SELECTOR, self.SEARCH_ICON_BTN).click()
+        self.get(*self.SEARCH_INPUT).send_keys(text)
+        self.browser.find_element(*self.SEARCH_ICON_BTN).click()
