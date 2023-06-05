@@ -1,0 +1,31 @@
+# Compiled Python files
+*.pyc
+
+# Virtual environment
+venv/
+env/
+selenium-venv/
+
+# IDE files
+.vscode/
+.idea/
+
+# Test reports and logs
+test-reports/
+logs/
+
+# WebDriver binaries
+webdriver/
+
+# Selenium Grid configurations
+node-config.json
+
+# Environment configuration files
+.env
+
+# Other temporary or generated files
+*.log
+*.swp
+__pycache__/
+.pytest_cache
+
