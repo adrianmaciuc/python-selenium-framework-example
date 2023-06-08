@@ -40,4 +40,5 @@ class Product(BasePage):
     
     def proceed_to_checkout(self):
         self.get(*self.MINI_CART).click()
+        self.browser.implicitly_wait(1)
         self.get(*self.CHECKOUT_BTN).click()

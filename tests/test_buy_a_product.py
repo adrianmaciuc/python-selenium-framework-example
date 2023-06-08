@@ -4,7 +4,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from pages.home_page import HomePage
-from pages.product import Product
+from pages.product_page import Product
+from pages.shipping_page import Shipping
+from testdata.testdata_buy_product import testdata
 from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture
@@ -32,6 +34,28 @@ def test_buy_a_product(browser):
     assert product.get_value_of_items_in_cart() == "1"
 
     product.proceed_to_checkout()
-    product.wait_for_loading_spinner()
 
-    time.sleep(5)
+    shipping_page = Shipping(browser)
+    shipping_page.wait_for_loading_spinner()
+
+    assert 'checkout/#shipping' in browser.current_url
+
+    shipping_page.insert_text_in_input_field(testdata["email"], 'email')
+    shipping_page.insert_text_in_input_field(testdata["first_name"], 'first_name')
+    shipping_page.insert_text_in_input_field(testdata["last_name"], 'last_name')
+    shipping_page.insert_text_in_input_field(testdata["street_address"], 'street_address')
+    shipping_page.insert_text_in_input_field(testdata["city"], 'city')
+    shipping_page.insert_text_in_input_field(testdata["post_code"], 'post_code') 
+    shipping_page.insert_text_in_input_field(testdata["phone"], 'phone')   
+    shipping_page.select_country('Romania')
+    shipping_page.wait_for_loading_spinner()
+    shipping_page.state_select('Cluj')
+    shipping_page.wait_for_loading_spinner()
+    shipping_page.select_ship_method()
+
+    shipping_page.click_next()
+    time.sleep(2)
+
+    assert 'checkout/#payment' in browser.current_url
+
+    time.sleep(4)
