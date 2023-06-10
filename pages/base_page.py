@@ -2,8 +2,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
+
 class BasePage:
-    LOADING_SPINNER = (By.CSS_SELECTOR , '[title="Loading..."]')
+    LOADING_SPINNER = (By.CSS_SELECTOR, '[title="Loading..."]')
 
     def __init__(self, browser):
         self.browser = browser
@@ -19,4 +20,4 @@ class BasePage:
         WebDriverWait(self.browser, 10).until_not(EC.presence_of_element_located(self.LOADING_SPINNER))
 
     def contains(self, text):
-        return self.browser.find_element(By.XPATH, f'//*[contains(text(),"{text}")]') 
+        return self.browser.find_element(By.XPATH, f'//*[contains(text(),"{text}")]')

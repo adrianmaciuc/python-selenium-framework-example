@@ -4,30 +4,31 @@ from selenium.webdriver.support.ui import WebDriverWait
 from pages.base_page import BasePage
 from selenium.webdriver.support.ui import Select
 
+
 class Shipping(BasePage):
-    SHIP_METHOD_5 = (By.CSS_SELECTOR , 'input.radio')
-    NEXT_BTN = (By.CSS_SELECTOR , '[data-role="opc-continue"]')
+    SHIP_METHOD_5 = (By.CSS_SELECTOR, 'input.radio')
+    NEXT_BTN = (By.CSS_SELECTOR, '[data-role="opc-continue"]')
 
     def insert_text_in_input_field(self, text, field):
         input_fields = {
-            "email" : (By.CSS_SELECTOR , '#shipping #customer-email'),
-            "first_name" : (By.CSS_SELECTOR , '[name="firstname"]'),
-            "last_name" : (By.CSS_SELECTOR , '[name="lastname"]'),
-            "street_address" : (By.CSS_SELECTOR , '[name="street[0]"]'),
-            "city" : (By.CSS_SELECTOR , '[name="city"]'),
-            "phone" : (By.CSS_SELECTOR , '[name="telephone"]'),
-            "post_code" : (By.CSS_SELECTOR , '[name="postcode"]'),
+            "email": (By.CSS_SELECTOR, '#shipping #customer-email'),
+            "first_name": (By.CSS_SELECTOR, '[name="firstname"]'),
+            "last_name": (By.CSS_SELECTOR, '[name="lastname"]'),
+            "street_address": (By.CSS_SELECTOR, '[name="street[0]"]'),
+            "city": (By.CSS_SELECTOR, '[name="city"]'),
+            "phone": (By.CSS_SELECTOR, '[name="telephone"]'),
+            "post_code": (By.CSS_SELECTOR, '[name="postcode"]'),
         }
 
         self.get(*input_fields.get(field, "input field wrong or does not exist")).send_keys(text)
 
     def select_country(self, country):
-        select_country = (By.CSS_SELECTOR , '[name="country_id"]')
+        select_country = (By.CSS_SELECTOR, '[name="country_id"]')
         select = Select(self.get(*select_country))
         select.select_by_visible_text(country)
 
     def state_select(self, state):
-        select_state = (By.CSS_SELECTOR , '[name="shippingAddress.region_id"] > div > select')
+        select_state = (By.CSS_SELECTOR, '[name="shippingAddress.region_id"] > div > select')
         select = Select(self.get(*select_state))
         select.select_by_visible_text(state)
 

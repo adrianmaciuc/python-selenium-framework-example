@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
+
 class HomePage(BasePage):
     URL = 'https://magento.softwaretestingboard.com/'
-    SEARCH_INPUT = (By.CSS_SELECTOR , '#search')
-    SEARCH_ICON_BTN = (By.CSS_SELECTOR , 'button.action.search')
+    SEARCH_INPUT = (By.CSS_SELECTOR, '#search')
+    SEARCH_ICON_BTN = (By.CSS_SELECTOR, 'button.action.search')
     PRODUCT_ITEM_INFO = (By.CSS_SELECTOR, '.product-item-info')
 
     def load(self):
