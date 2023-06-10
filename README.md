@@ -18,12 +18,14 @@
 
 6️⃣ Continuous Integration with Github Actions
 
+7️⃣ Use of flake8 for style guide adherence to PEP8 standards
+
 
 ## 📋 Specifications and Design
 
 📌 All the tests in this framework are designed to cover specific functionalities of the web application.
 
-📌 The framework follows the principles of the Page Object Model (POM), where each web page is represented as a separate class, and actions and assertions are defined within these classes.
+📌 The framework follows the principles of the Page Object Model (POM), where each web page is represented as a separate class, and actions and selectors are defined within these classes.
 
 
 ## 🎯 Testing approach
