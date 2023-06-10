@@ -12,12 +12,15 @@ class BasePage:
     def get(self, *locator):
         return WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located(locator))
 
+    def get_multiple(self, *locator):
+        return self.browser.find_elements(*locator)
+
     def click(self, *by_locator):
         self.get(*by_locator).click()
+
+    def contains(self, text):
+        return self.browser.find_element(By.XPATH, f'//*[contains(text(),"{text}")]')
 
     def wait_for_loading_spinner(self):
         WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.LOADING_SPINNER))
         WebDriverWait(self.browser, 10).until_not(EC.presence_of_element_located(self.LOADING_SPINNER))
-
-    def contains(self, text):
-        return self.browser.find_element(By.XPATH, f'//*[contains(text(),"{text}")]')
