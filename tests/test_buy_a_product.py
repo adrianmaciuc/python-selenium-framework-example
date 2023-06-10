@@ -11,6 +11,7 @@ from pages.checkout_success_page import Checkout
 from testdata.testdata_buy_product import testdata
 from webdriver_manager.chrome import ChromeDriverManager
 
+
 @pytest.fixture
 def browser():
     options = Options()
@@ -18,9 +19,12 @@ def browser():
     options.add_argument('log-level=3')
     if platform != "win32":
         options.add_argument("--headless")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()
+                        ), options=options)
     yield driver
     driver.quit()
+
 
 def test_buy_a_product(browser):
     home_page = HomePage(browser)
@@ -33,7 +37,7 @@ def test_buy_a_product(browser):
     product.choose_color('blue')
     product.click_add_to_cart()
 
-    assert product.add_to_cart_success_msg_visible() == True
+    assert product.add_to_cart_success_msg_visible()
     assert product.get_value_of_items_in_cart() == "1"
 
     product.proceed_to_checkout()
@@ -48,8 +52,8 @@ def test_buy_a_product(browser):
     shipping_page.insert_text_in_input_field(testdata["last_name"], 'last_name')
     shipping_page.insert_text_in_input_field(testdata["street_address"], 'street_address')
     shipping_page.insert_text_in_input_field(testdata["city"], 'city')
-    shipping_page.insert_text_in_input_field(testdata["post_code"], 'post_code') 
-    shipping_page.insert_text_in_input_field(testdata["phone"], 'phone')   
+    shipping_page.insert_text_in_input_field(testdata["post_code"], 'post_code')
+    shipping_page.insert_text_in_input_field(testdata["phone"], 'phone')
     shipping_page.select_country(testdata["country"])
     shipping_page.wait_for_loading_spinner()
     shipping_page.state_select(testdata["state"])
