@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from pages.base_page import BasePage
 
 class Product(BasePage):
@@ -42,3 +44,6 @@ class Product(BasePage):
         self.get(*self.MINI_CART).click()
         self.browser.implicitly_wait(1)
         self.get(*self.CHECKOUT_BTN).click()
+
+    def wait_for_page_to_load(self):
+        WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable(self.COLOR_BLUE))

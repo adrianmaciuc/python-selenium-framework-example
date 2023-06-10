@@ -5,6 +5,7 @@ testdata = {
     "street_address" : "123 Fake St",
     "city" : "Cluj-Napoca",
     "country" : "Romania",
-    "post_code" : "12345",
+    "post_code" : "123456",
     "phone" : "1234567890",
+    "state" : "Cluj",
 }

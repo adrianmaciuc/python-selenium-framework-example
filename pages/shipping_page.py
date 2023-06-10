@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 from pages.base_page import BasePage
 from selenium.webdriver.support.ui import Select
 
@@ -34,3 +36,7 @@ class Shipping(BasePage):
 
     def click_next(self):
         self.get(*self.NEXT_BTN).click()
+
+    def wait_for_page_to_load(self):
+        WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable(self.NEXT_BTN))
+        WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable(self.SHIP_METHOD_5))
