@@ -24,4 +24,6 @@ def test_buy_a_product(browser):
     home_page = HomePage(browser)
     home_page.load()
 
-    
+    assert home_page.get_number_of_products() == 6
+
+    home_page.check_valid_links_of_products()
