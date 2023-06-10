@@ -27,3 +27,5 @@ def test_buy_a_product(browser):
     assert home_page.get_number_of_products() == 6
 
     home_page.check_valid_links_of_products()
+    home_page.check_valid_links_of_footer()
+    home_page.check_valid_links_of_navbar()
