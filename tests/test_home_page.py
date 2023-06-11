@@ -20,7 +20,7 @@ def browser():
     driver.quit()
 
 
-def test_buy_a_product(browser):
+def test_smoke_home_page(browser):
     home_page = HomePage(browser)
     home_page.load()
 
