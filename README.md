@@ -1,10 +1,10 @@
-👋 Hi there! Welcome to the Selenium with Python and Pytest Framework Example!
+Welcome to the Selenium with Python and Pytest Framework Example!
 
-👨‍💻 Created by Adrian Maciuc - https://www.martioli.com - showcases a framework built with Python Pytest and Selenium for automated testing of web application https://magento.softwaretestingboard.com/ . The main goal is to provide a modular and maintainable testing solution .
+Created by Adrian Maciuc - https://www.martioli.com - showcases a framework built with Python Pytest and Selenium for automated testing of web application https://magento.softwaretestingboard.com/ . The main goal is to provide a modular and maintainable testing solution .
 
 ## 📝 Overview
 
-👀 This project includes:
+This project includes:
 
 1️⃣ Tests for the web application
 
@@ -21,14 +21,14 @@
 7️⃣ Use of flake8 for style guide adherence to PEP8 standards
 
 
-## 📋 Specifications and Design
+## Specifications and Design
 
 📌 All the tests in this framework are designed to cover specific functionalities of the web application.
 
 📌 The framework follows the principles of the Page Object Model (POM), where each web page is represented as a separate class, and actions and selectors are defined within these classes.
 
 
-## 🎯 Testing approach
+## Testing approach
 
 📌 Modular test logic and Reusable page objects
 
@@ -38,11 +38,11 @@
 
 📌 The framework promotes the use of explicit assertions for better test readability and failure reporting.
 
-## 📊 Testing Reports
+## Testing Reports
 
 💻 The framework is integrated with pytest for test execution and reporting. Upon running the tests, detailed test reports can be generated in various formats, such as HTML, XML, or JSON.
 
-## 🔧 Installation 
+## Installation 
 
 🚀 To get started with this framework, simply follow these steps:
 
