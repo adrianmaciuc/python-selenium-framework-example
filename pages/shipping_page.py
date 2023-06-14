@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import Select
 class Shipping(BasePage):
     SHIP_METHOD_5 = (By.CSS_SELECTOR, 'input.radio')
     NEXT_BTN = (By.CSS_SELECTOR, '[data-role="opc-continue"]')
+    COUNTRY_VALUE = (By.CSS_SELECTOR, '[name="country_id"]')
+    STATE_VALUE = (By.CSS_SELECTOR, '[name="shippingAddress.region_id"] > div > select')
 
     def insert_text_in_input_field(self, text, field):
         input_fields = {
@@ -23,13 +25,11 @@ class Shipping(BasePage):
         self.get(*input_fields.get(field, "input field wrong or does not exist")).send_keys(text)
 
     def select_country(self, country):
-        select_country = (By.CSS_SELECTOR, '[name="country_id"]')
-        select = Select(self.get(*select_country))
+        select = Select(self.get(*self.COUNTRY_VALUE))
         select.select_by_visible_text(country)
 
     def state_select(self, state):
-        select_state = (By.CSS_SELECTOR, '[name="shippingAddress.region_id"] > div > select')
-        select = Select(self.get(*select_state))
+        select = Select(self.get(*self.STATE_VALUE))
         select.select_by_visible_text(state)
 
     def select_ship_method(self):
