@@ -23,6 +23,20 @@ class BasePage:
     def contains(self, text):
         return self.browser.find_element(By.XPATH, f'//*[contains(text(),"{text}")]')
 
+    def find_element_by_text(self, parent_locator, text):
+        element_found = False
+        for element in parent_locator:
+            if text.lower() in element.text.lower():
+                element_found = True
+                return element
+
+        if not element_found:
+            raise Exception(f'Element with text "{text}" not found')
+        
+    def get_nth_of_elements(self, nth, *locator_of_elements):
+        list_of_elements = self.browser.find_elements(*locator_of_elements)
+        return list_of_elements[nth-1]
+
     def wait_for_loading_spinner(self):
         WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.LOADING_SPINNER))
         WebDriverWait(self.browser, 10).until_not(EC.presence_of_element_located(self.LOADING_SPINNER))
