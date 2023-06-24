@@ -13,7 +13,6 @@ class HomePage(BasePage):
 
     def load(self):
         self.browser.get(self.URL)
-        self.browser.maximize_window()
 
     def get_list_of_product_items(self):
         return self.browser.find_elements(*self.PRODUCT_ITEM_INFO)
