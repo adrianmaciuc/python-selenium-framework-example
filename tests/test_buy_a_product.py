@@ -1,5 +1,4 @@
 import pytest
-from sys import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -16,9 +15,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 def browser():
     options = Options()
     options.add_argument("start-maximized")
-    options.add_argument('log-level=3')
-    if platform != "win32":
-        options.add_argument("--headless")
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()
                         ), options=options)
@@ -28,16 +24,24 @@ def browser():
 
 def test_buy_a_product(browser):
     home_page = HomePage(browser)
+
+    # open home url
     home_page.load()
+
+    # not able to intercept network calls
+
+    # open nth product from home page
     home_page.click_on_nth_product_item(1)
 
     product = Product(browser)
     product.wait_for_page_to_load()
     product.choose_size('S')
-    product.choose_color('blue')
-    product.click_add_to_cart()
+    product.choose_color('orange')
 
+    product.click_add_to_cart()
     assert product.add_to_cart_success_msg_visible()
+
+    # assert number of items in cart
     assert product.get_value_of_items_in_cart() == "1"
 
     product.proceed_to_checkout()
@@ -47,6 +51,7 @@ def test_buy_a_product(browser):
 
     assert 'checkout/#shipping' in shipping_page.browser.current_url
 
+    # fill in the info for shipping
     shipping_page.insert_text_in_input_field(testdata["email"], 'email')
     shipping_page.insert_text_in_input_field(testdata["first_name"], 'first_name')
     shipping_page.insert_text_in_input_field(testdata["last_name"], 'last_name')
@@ -68,6 +73,7 @@ def test_buy_a_product(browser):
 
     assert 'checkout/#payment' in payment_page.browser.current_url
 
+    # assert all the values entered at shipping are correctly saved at payment page
     ship_to_text = payment_page.ship_to_component_text()
 
     assert testdata["first_name"] in ship_to_text
@@ -86,4 +92,5 @@ def test_buy_a_product(browser):
 
     assert 'checkout/onepage/success/' in checkout_page.browser.current_url
 
+    # assert email and registration pops up
     assert testdata["email"] in checkout_page.contains(testdata["email"]).text
