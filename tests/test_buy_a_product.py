@@ -1,23 +1,16 @@
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from pages.home_page import HomePage
 from pages.product_page import Product
 from pages.shipping_page import Shipping
 from pages.payment_page import Payment
 from pages.checkout_success_page import Checkout
 from testdata.testdata_buy_product import testdata
-from webdriver_manager.chrome import ChromeDriverManager
+from .conftest import config_driver
 
 
 @pytest.fixture
 def browser():
-    options = Options()
-    options.add_argument("start-maximized")
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()
-                        ), options=options)
+    driver = config_driver()
     yield driver
     driver.quit()
 
