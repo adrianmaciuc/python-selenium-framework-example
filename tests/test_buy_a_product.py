@@ -5,7 +5,7 @@ from pages.shipping_page import Shipping
 from pages.payment_page import Payment
 from pages.checkout_success_page import Checkout
 from testdata.testdata_buy_product import testdata
-from .conftest import config_driver
+from tests.conftest import config_driver
 
 
 @pytest.fixture

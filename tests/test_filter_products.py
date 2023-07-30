@@ -1,23 +1,13 @@
 import pytest
 import time
 import re
-from sys import platform
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from pages.product_catalog import ProductCatalog
-from webdriver_manager.chrome import ChromeDriverManager
+from tests.conftest import config_driver
 
 
 @pytest.fixture
 def browser():
-    options = Options()
-    options.add_argument("start-maximized")
-    options.add_argument('log-level=3')
-    if platform != "win32":
-        options.add_argument("--headless")
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()), options=options)
+    driver = config_driver()
     yield driver
     driver.quit()
 
