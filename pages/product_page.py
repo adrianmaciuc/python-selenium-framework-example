@@ -36,6 +36,7 @@ class Product(BasePage):
         self.get(*self.ADD_TO_CART_BTN).click()
 
     def add_to_cart_success_msg_visible(self):
+        time.sleep(2)
         if self.get(*self.ADD_TO_CART_SUCCESS_MSG):
             return True
 
