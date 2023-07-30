@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from pages.base_page import BasePage
+import time
 
 
 class Product(BasePage):
@@ -43,7 +44,7 @@ class Product(BasePage):
 
     def proceed_to_checkout(self):
         self.get(*self.MINI_CART).click()
-        self.browser.implicitly_wait(1)
+        time.sleep(1)
         self.get(*self.CHECKOUT_BTN).click()
 
     def wait_for_page_to_load(self):
